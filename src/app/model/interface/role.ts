@@ -13,3 +13,12 @@ export interface IDesignation {
     designationId: number;
     designation: string;
 }
+
+export interface Employee {
+    empName: string;
+    empId: number;
+    empCode: string;
+    empemailId: string;
+    empDesignation: string;
+    role: string;
+}
