@@ -1,0 +1,37 @@
+<p>Designation works!</p>
+
+<div class="row">
+
+  <!-- Show loader when isLoader is true -->
+  <div *ngIf="isLoader" class="col-12 text-center">
+      <div class="spinner-border text-muted"></div>
+      <div class="spinner-border text-primary"></div>
+      <div class="spinner-border text-success"></div>
+      <div class="spinner-border text-info"></div>
+      <div class="spinner-border text-warning"></div>
+      <div class="spinner-border text-danger"></div>
+      <div class="spinner-border text-secondary"></div>
+      <div class="spinner-border text-dark"></div>
+      <div class="spinner-border text-light"></div>
+  </div>
+
+  <!-- Show message if there are no designations -->
+  <div *ngIf="!isLoader && designationList.length === 0" class="col-12">
+      <p class="text-center">No designations found.</p>
+  </div>
+
+  <!-- Corrected: Wrap *ngFor inside <ng-container> to avoid multiple template bindings -->
+  <ng-container *ngIf="!isLoader">
+    <div class="col-3" *ngFor="let item of designationList; let i = index;">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">{{ item.designation }}</h4>
+                <p class="card-text">Designation ID: {{ item.designationId }}</p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
+  </ng-container>
+
+</div>
