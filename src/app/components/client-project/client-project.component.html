@@ -1,9 +1,11 @@
 <p>client-project works!</p>
+<app-alert [alertType] = "'Error'" [message]="'Welcome to  the client project page'"></app-alert>
 <div class = "row">
     <div class = "col-8">
         <div class = "card">
             <div class = "card-header bg-success">
-                Client List
+                Client List - {{ firstName() }}
+                <button class = "btn btn-danger" (click)="changeFnAme()">change F name </button>
             </div>
             <div class = "card-body">
                 <div class = "row">
@@ -12,23 +14,23 @@
                             <thead>
                                 <tr>
                                     <th>Sr No</th>
-                                    <th>Company Name</th>
-                                    <th>Person Name</th>
-                                    <th>Contact No</th>
-                                    <th>City</th>
+                                    <th>Client Name</th>
+                                    <th>Project Name</th>
+                                    <th>Employee Name</th>
+                                    <th>Start Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of clientList; let i = index;">
+                                <tr *ngFor="let item of projectList(); let i = index;">
                                     <td>{{ i+1 }}</td>
-                                    <td>{{ item.companyName }}</td>
-                                    <td>{{ item.contactPersonName }}</td>
-                                    <td>{{ item.contactNo }}</td>
-                                    <td>{{ item.city }}</td>
+                                    <td>{{ item.clientName }}</td>
+                                    <td>{{ item.projectName }}</td>
+                                    <td>{{ item.empName }}</td>
+                                    <td>{{ item.startDate | date : 'dd-MMM-YYYY' }}</td>
                                     <td>
                                         <button class = "btn btn-primary btn-sm" (click)="onEdit(item)">Edit</button>
-                                        <button class = "btn btn-danger btn-sm" (click)="onDelete(item.clientId)">Delete</button>
+                                        <button class = "btn btn-danger btn-sm" >Delete</button>
                                 </tr>
                             </tbody>
                         </table>

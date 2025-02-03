@@ -6,10 +6,12 @@ import { ClientService } from '../../services/client.service';
 import { APIResponseModel } from '../../model/interface/role';
 import { UpperCasePipe } from '@angular/common';
 import { Observable } from 'rxjs';
+import { AlertComponent } from "../../reusableComponent/alert/alert.component";
+import { MyButtonComponent } from "../../reusableComponent/my-button/my-button.component";
 
 @Component({
   selector: 'app-client',
-  imports: [CommonModule, FormsModule, UpperCasePipe, DatePipe,JsonPipe,AsyncPipe],
+  imports: [CommonModule, FormsModule, UpperCasePipe, DatePipe, JsonPipe, AsyncPipe, AlertComponent, MyButtonComponent],
   templateUrl: './client.component.html',
   styleUrl: './client.component.css',
   standalone : true
@@ -44,7 +46,7 @@ export class ClientComponent implements OnInit {
     });
   }
 
-  onSaveCilent() {
+  onSaveClient(data:string) {
     this.cilentService.addUpdate(this.clientObj).subscribe((res: APIResponseModel) => {
       if (res.result) {
         alert("Client Added Successfully");

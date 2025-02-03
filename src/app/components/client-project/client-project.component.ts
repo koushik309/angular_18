@@ -1,13 +1,15 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ClientService } from '../../services/client.service';
-import { APIResponseModel, Employee } from '../../model/interface/role';
+import { APIResponseModel, ClientProject, Employee } from '../../model/interface/role';
+import { Client } from '../../model/class/Client';
+import { AlertComponent } from "../../reusableComponent/alert/alert.component";
 
 @Component({
   selector: 'app-client-project',
   standalone: true,
-  imports:  [FormsModule,CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, DatePipe, AlertComponent],
   templateUrl: './client-project.component.html',
   styleUrl: './client-project.component.scss'
 })
@@ -32,9 +34,16 @@ export class ClientProjectComponent implements OnInit {
 
   clientSrv = inject(ClientService);
   employeeList: Employee[] = [];
+  clientList:Client[] = [];
+
+  firstName = signal("Angular 18");
+  projectList = signal<ClientProject[]>([]);
+
   ngOnInit(): void {
+    const name= this.firstName
     this.getAllEmployee();
     this.getAllClient();
+    this.getAllClientProject();
       
   }
 
@@ -48,8 +57,11 @@ export class ClientProjectComponent implements OnInit {
       this.clientList = res.data;
     });
   }
-
-  clientList: any;
+  getAllClientProject() {
+    this.clientSrv.getAllClientProject().subscribe((res:APIResponseModel) => {
+      this.projectList.set(res.data);
+    });
+  }
   onDelete(arg0: any) {
   throw new Error('Method not implemented.');
   }
@@ -67,6 +79,10 @@ export class ClientProjectComponent implements OnInit {
         alert(res.message);
       }
     });
+  }
+  changeFnAme(){
+    this.firstName.set("React Js 18");
+
   }
 
 }
