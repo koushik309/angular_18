@@ -30,4 +30,7 @@ export class ClientService {
   addClientprojectUpdate(obj: Client): Observable<APIResponseModel> {
     return this.http.post<APIResponseModel>(environment.API_URL + "AddUpdateClientProject", obj);
   }
+  getAllUser() {
+      return this.http.get("https://jsonplaceholder.typicode.com/users");
+  }
 }
